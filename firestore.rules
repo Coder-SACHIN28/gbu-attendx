@@ -1,0 +1,95 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isEmailVerified() {
+      return request.auth.token.email_verified == true;
+    }
+    
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+    
+    function hasRole(role) {
+      return isAuthenticated() && 
+             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == role;
+    }
+    
+    function isValidGBUEmail() {
+      return request.auth.token.email.matches('.*@gbu\\.ac\\.in$') ||
+             request.auth.token.email.matches('.*@gmail\\.com$'); // For testing
+    }
+    
+    function isWithinTimeWindow(startTime, endTime) {
+      return request.time >= startTime && request.time <= endTime;
+    }
+    
+    function validateAttendanceData(data) {
+      return data.keys().hasAll([
+        'studentId', 'classId', 'timestamp', 'location', 
+        'verificationCode', 'status'
+      ]) &&
+      data.studentId == request.auth.uid &&
+      data.timestamp is timestamp &&
+      data.location is latlng &&
+      data.status in ['present', 'late', 'absent'];
+    }
+    
+    // Users collection - Enhanced security
+    match /users/{userId} {
+      allow read: if isAuthenticated() && isEmailVerified() &&
+                     (isOwner(userId) || hasRole('teacher') || hasRole('admin'));
+      
+      allow create: if isAuthenticated() && isEmailVerified() &&
+                       isOwner(userId) && isValidGBUEmail();
+      
+      allow update: if isAuthenticated() && isEmailVerified() &&
+                       isOwner(userId) && isValidGBUEmail();
+      
+      allow delete: if hasRole('admin');
+    }
+    
+    // Classes collection
+    match /classes/{classId} {
+      allow read: if isAuthenticated() && isEmailVerified();
+      allow create, update, delete: if hasRole('teacher') || hasRole('admin');
+    }
+    
+    // Attendance records
+    match /attendance/{attendanceId} {
+      allow read: if isAuthenticated() && isEmailVerified() &&
+                     (resource.data.studentId == request.auth.uid || 
+                      hasRole('teacher') || hasRole('admin'));
+      
+      allow create: if isAuthenticated() && isEmailVerified() &&
+                       validateAttendanceData(request.resource.data);
+      
+      allow update: if hasRole('teacher') || hasRole('admin');
+      allow delete: if hasRole('admin');
+    }
+    
+    // Verification codes
+    match /verification_codes/{codeId} {
+      allow read: if isAuthenticated() && isEmailVerified();
+      allow create, update, delete: if hasRole('teacher') || hasRole('admin');
+    }
+    
+    // Schedules/Timetables
+    match /schedules/{scheduleId} {
+      allow read: if isAuthenticated() && isEmailVerified();
+      allow create, update, delete: if hasRole('teacher') || hasRole('admin');
+    }
+    
+    // Reports and Analytics
+    match /reports/{reportId} {
+      allow read: if isAuthenticated() && isEmailVerified() &&
+                     (hasRole('teacher') || hasRole('admin'));
+      allow create, update, delete: if hasRole('admin');
+    }
+  }
+}
