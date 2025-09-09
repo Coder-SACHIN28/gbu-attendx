@@ -183,7 +183,7 @@ flutter build web --release
 ## 📞 Support
 
 For support and questions:
-- 📧 Email: support@gbu-attendx.com
+- 📧 Email: sachinkumar.official28@gmail.com
 - 📱 GitHub Issues: [Create an issue](../../issues)
 
 ## 📄 License
