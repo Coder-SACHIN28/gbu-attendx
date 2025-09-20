@@ -3,7 +3,6 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../constants/app_constants.dart';
 import '../../data/models/hive_models.dart';
-import 'dart:convert';
 
 class OfflineStorageService {
   static final OfflineStorageService _instance = OfflineStorageService._internal();
@@ -77,8 +76,8 @@ class OfflineStorageService {
   /// Check if device is online
   Future<bool> isOnline() async {
     try {
-      final connectivityResult = await Connectivity().checkConnectivity();
-      return connectivityResult != ConnectivityResult.none;
+    final connectivityResults = await _connectivity.checkConnectivity();
+    return !connectivityResults.contains(ConnectivityResult.none);
     } catch (e) {
       return false;
     }

@@ -40,9 +40,12 @@ class AppConstants {
   static const double biometricConfidenceThreshold = 0.8;
   
   // Network Configuration
+  static const String baseUrl = 'https://api.gbu-attendx.com/v1';
+  static const Duration networkTimeout = Duration(seconds: 30);
   static const int connectionTimeoutSeconds = 30;
   static const int receiveTimeoutSeconds = 30;
   static const int maxRetries = 3;
+  static const bool isDebugMode = true;
   
   // Error Messages
   static const String networkErrorMessage = 'Network error. Please check your connection.';

@@ -249,26 +249,16 @@ class FaceRecognitionService {
 
       final InputImageFormat inputImageFormat = InputImageFormat.yuv420;
 
-      final planeData = cameraImage.planes.map(
-        (Plane plane) {
-          return InputImagePlaneMetadata(
-            bytesPerRow: plane.bytesPerRow,
-            height: plane.height,
-            width: plane.width,
-          );
-        },
-      ).toList();
-
-      final InputImageData inputImageData = InputImageData(
+      final metadata = InputImageMetadata(
         size: imageSize,
-        imageRotation: imageRotation,
-        inputImageFormat: inputImageFormat,
-        planeData: planeData,
+        rotation: imageRotation,
+        format: inputImageFormat,
+        bytesPerRow: cameraImage.planes[0].bytesPerRow,
       );
 
       return InputImage.fromBytes(
         bytes: bytes,
-        inputImageData: inputImageData,
+        metadata: metadata,
       );
     } catch (e) {
       return null;

@@ -3,7 +3,6 @@ import 'package:local_auth/local_auth.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:pointycastle/export.dart';
-import 'dart:typed_data';
 import 'dart:convert';
 import 'dart:math';
 
@@ -61,15 +60,7 @@ class BiometricService {
 
       final bool didAuthenticate = await _localAuth.authenticate(
         localizedReason: reason,
-        authMessages: const [
-          AndroidAuthMessages(
-            signInTitle: 'GBU AttendX - Biometric Authentication',
-            cancelButton: 'Cancel',
-          ),
-          IOSAuthMessages(
-            cancelButton: 'Cancel',
-          ),
-        ],
+        // authMessages removed - not supported in newer versions
         options: AuthenticationOptions(
           useErrorDialogs: useErrorDialogs,
           stickyAuth: stickyAuth,
