@@ -1,0 +1,133 @@
+name: gbu_attendx
+description: GBU AttendX - Smart Attendance System for Gautam Buddha University
+publish_to: 'none'
+version: 2.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: ">=3.19.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Firebase & Backend
+  firebase_core: ^3.8.1
+  firebase_auth: ^5.3.6
+  cloud_firestore: ^5.5.1
+  firebase_storage: ^12.3.8
+  firebase_messaging: ^15.1.8
+  firebase_analytics: ^11.3.8
+
+  # Biometric & Security
+  local_auth: ^2.3.0
+  crypto: ^3.0.6
+  flutter_secure_storage: ^9.2.2
+  encrypt: ^5.0.3
+  google_mlkit_face_detection: ^0.10.0
+  google_mlkit_commons: ^0.7.1
+  pointycastle: ^3.9.1
+  
+  # Location & Camera
+  geolocator: ^13.0.2
+  camera: ^0.11.0+2
+  image_picker: ^1.1.2
+  image: ^4.2.0
+  
+  # Offline & Storage
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  sqflite: ^2.4.1
+  shared_preferences: ^2.3.3
+  path_provider: ^2.1.5
+  
+  # UI & Animations
+  flutter_animate: ^4.5.0
+  lottie: ^3.1.2
+  shimmer: ^3.0.0
+  cached_network_image: ^3.4.1
+  photo_view: ^0.15.0
+  
+  # Charts & Analytics
+  fl_chart: ^0.69.2
+  table_calendar: ^3.1.2
+  
+  # Notifications & Background
+  flutter_local_notifications: ^18.0.1
+  workmanager: ^0.5.2
+  
+  # State Management & Architecture
+  provider: ^6.1.2
+  get_it: ^8.0.4
+  bloc: ^8.1.4
+  flutter_bloc: ^8.1.6
+  auto_route: ^9.2.2
+  
+  # Network & HTTP
+  http: ^1.2.2
+  dio: ^5.7.0
+  connectivity_plus: ^6.1.1
+  web_socket_channel: ^3.0.3
+  
+  # CSV & File Operations
+  csv: ^6.0.0
+  file_picker: ^8.1.4
+  excel: ^4.0.6
+  pdf: ^3.11.1
+  printing: ^5.13.4
+  syncfusion_flutter_xlsio: ^26.2.14
+  open_filex: ^4.5.0
+  
+  # Utilities
+  intl: ^0.19.0
+  uuid: ^4.5.1
+  equatable: ^2.0.7
+  dartz: ^0.10.1
+  rxdart: ^0.28.0
+  json_annotation: ^4.9.0
+  
+  # UI Components
+  cupertino_icons: ^1.0.8
+  material_design_icons_flutter: ^7.0.7296
+  font_awesome_flutter: ^10.7.0
+  
+  # Permissions & System
+  permission_handler: ^11.3.1
+  device_info_plus: ^10.1.2
+  package_info_plus: ^8.0.2
+  app_settings: ^5.1.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+
+  # Code Generation
+  build_runner: ^2.4.13
+  auto_route_generator: ^9.0.0
+  hive_generator: ^2.0.1
+  json_serializable: ^6.8.0
+  
+  # Testing
+  mockito: ^5.4.4
+  
+  # Linting & Code Quality
+  flutter_lints: ^3.0.2
+  very_good_analysis: ^5.1.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/
+    - assets/images/
+    - assets/icons/
+    - assets/animations/
+    - assets/sounds/
+    - assets/lottie/
+
+  # fonts:
+  #   - family: Poppins
+  #     fonts:
+  #       - asset: assets/fonts/Poppins-Regular.ttf
