@@ -17,6 +17,7 @@ class OfflineStorageService {
   Box<AttendanceSummary>? _summaryBox;
   Box<dynamic>? _cacheBox;
 
+  final Connectivity _connectivity = Connectivity();
   bool _isInitialized = false;
 
   /// Initialize offline storage

@@ -29,9 +29,9 @@ class TimetableService {
   /// Configure Dio client
   void _configureDio() {
     _dio.options.baseUrl = AppConstants.baseUrl;
-    _dio.options.connectTimeout = Duration(seconds: AppConstants.networkTimeout);
-    _dio.options.receiveTimeout = Duration(seconds: AppConstants.networkTimeout);
-    _dio.options.sendTimeout = Duration(seconds: AppConstants.networkTimeout);
+    _dio.options.connectTimeout = AppConstants.networkTimeout;
+    _dio.options.receiveTimeout = AppConstants.networkTimeout;
+    _dio.options.sendTimeout = AppConstants.networkTimeout;
 
     // Add interceptors
     _dio.interceptors.add(LogInterceptor(
