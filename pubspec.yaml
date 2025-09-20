@@ -54,7 +54,6 @@ dependencies:
   
   # Notifications & Background
   flutter_local_notifications: ^18.0.1
-  workmanager: ^0.5.2
   
   # State Management & Architecture
   provider: ^6.1.2
